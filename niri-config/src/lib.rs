@@ -451,6 +451,8 @@ pub struct Layout {
     #[knuffel(child, unwrap(argument), default)]
     pub center_focused_column: CenterFocusedColumn,
     #[knuffel(child)]
+    pub wrap_focus: bool,
+    #[knuffel(child)]
     pub always_center_single_column: bool,
     #[knuffel(child)]
     pub empty_workspace_above_first: bool,
@@ -470,6 +472,7 @@ impl Default for Layout {
             preset_column_widths: Default::default(),
             default_column_width: Default::default(),
             center_focused_column: Default::default(),
+            wrap_focus: false,
             always_center_single_column: false,
             empty_workspace_above_first: false,
             gaps: FloatOrInt(16.),
@@ -3718,6 +3721,7 @@ mod tests {
                         bottom: FloatOrInt(0.),
                     },
                     center_focused_column: CenterFocusedColumn::OnOverflow,
+                    wrap_focus: false,
                     always_center_single_column: false,
                     empty_workspace_above_first: false,
                 },

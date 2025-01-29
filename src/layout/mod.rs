@@ -309,6 +309,7 @@ pub struct Options {
     pub shadow: niri_config::Shadow,
     pub insert_hint: niri_config::InsertHint,
     pub center_focused_column: CenterFocusedColumn,
+    pub wrap_focus: bool,
     pub always_center_single_column: bool,
     pub empty_workspace_above_first: bool,
     /// Column widths that `toggle_width()` switches between.
@@ -333,6 +334,7 @@ impl Default for Options {
             shadow: Default::default(),
             insert_hint: Default::default(),
             center_focused_column: Default::default(),
+            wrap_focus: false,
             always_center_single_column: false,
             empty_workspace_above_first: false,
             preset_column_widths: vec![
@@ -517,6 +519,7 @@ impl Options {
             insert_hint: layout.insert_hint,
             center_focused_column: layout.center_focused_column,
             always_center_single_column: layout.always_center_single_column,
+            wrap_focus: layout.wrap_focus,
             empty_workspace_above_first: layout.empty_workspace_above_first,
             preset_column_widths,
             default_column_width,
