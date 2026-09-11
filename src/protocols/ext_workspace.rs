@@ -286,7 +286,7 @@ fn refresh_workspace(
 
             let mut id_set = false;
             let mut recreate = false;
-            let id = ws.name();
+            let id = None;
             if data.id.as_ref() != id {
                 if data.id.is_some() {
                     recreate = true;
@@ -308,7 +308,7 @@ fn refresh_workspace(
                 state_changed = true;
             }
 
-            // Recreate means name got changed or unset (meaning data.name is back to ws_idx).
+            /*/ Recreate means name got changed or unset (meaning data.name is back to ws_idx).
             let check = recreate
                 || if data.id.is_some() {
                     // True means workspace got named, going from ws_idx to name.
@@ -317,14 +317,10 @@ fn refresh_workspace(
                     // The workspace is unnamed, check if ws_idx changed.
                     coordinates_changed
                 };
-            let mut name_changed = false;
-            if check {
-                let new_name = build_name(ws, ws_idx);
-                // This will likely be true, except if the workspace got named its index.
-                if data.name != new_name {
-                    data.name = new_name;
-                    name_changed = true;
-                }
+            */
+            let name_changed = { ws.name().map_or(false, |name| name != &data.name) };
+            if recreate || coordinates_changed || name_changed {
+                data.name = build_name(ws, ws_idx);
             }
 
             let mut output_changed = false;
@@ -383,7 +379,7 @@ fn refresh_workspace(
         Entry::Vacant(entry) => {
             // New workspace, start tracking it.
             let mut data = ExtWorkspaceData {
-                id: ws.name().cloned(),
+                id: None,
                 name: build_name(ws, ws_idx),
                 coordinates: ArrayVec::from([0, ws_idx as u32]),
                 state,
