@@ -4540,9 +4540,9 @@ impl<W: LayoutElement> Layout<W> {
 
     pub fn set_workspace_name(&mut self, name: String, reference: Option<WorkspaceReference>) {
         // ignore the request if the name is already used by another workspace
-        if self.find_workspace_by_name(&name).is_some() {
-            return;
-        }
+        // if self.find_workspace_by_name(&name).is_some() {
+        //    return;
+        // }
 
         let ws = if let Some(reference) = reference {
             self.find_workspace_by_ref(reference)
